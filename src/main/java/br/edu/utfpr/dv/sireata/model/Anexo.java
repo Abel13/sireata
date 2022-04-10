@@ -3,14 +3,18 @@ package br.edu.utfpr.dv.sireata.model;
 public class Anexo {
 	
 	private int idAnexo;
-	private Ata ata;
+	private Ata ata = new Ata();
 	private int ordem;
 	private String descricao;
 	private byte[] arquivo;
 	
+	public Anexo(Ata ata) {
+		this();
+		this.ata = ata;
+	}
+
 	public Anexo() {
 		this.setIdAnexo(0);
-		this.setAta(new Ata());
 		this.setDescricao("");
 		this.setOrdem(0);
 		this.setArquivo(null);
@@ -24,9 +28,6 @@ public class Anexo {
 	}
 	public Ata getAta() {
 		return ata;
-	}
-	public void setAta(Ata ata) {
-		this.ata = ata;
 	}
 	public String getDescricao() {
 		return descricao;
