@@ -12,7 +12,10 @@ import br.edu.utfpr.dv.sireata.bo.AtaBO;
 import br.edu.utfpr.dv.sireata.bo.ComentarioBO;
 import br.edu.utfpr.dv.sireata.model.Ata;
 import br.edu.utfpr.dv.sireata.model.Comentario;
-import br.edu.utfpr.dv.sireata.model.Comentario.SituacaoComentario;
+import br.edu.utfpr.dv.sireata.model.ComentarioAceito;
+import br.edu.utfpr.dv.sireata.model.ComentarioNaoAnalisado;
+import br.edu.utfpr.dv.sireata.model.ComentarioRecusado;
+import br.edu.utfpr.dv.sireata.model.SituacaoComentario;
 
 public class EditarComentarioWindow extends EditarWindow {
 	
@@ -34,10 +37,10 @@ public class EditarComentarioWindow extends EditarWindow {
 		
 		this.cbSituacao = new NativeSelect("Parecer");
 		this.cbSituacao.setWidth("400px");
-		this.cbSituacao.addItem(SituacaoComentario.NAOANALISADO);
-		this.cbSituacao.addItem(SituacaoComentario.ACEITO);
-		this.cbSituacao.addItem(SituacaoComentario.RECUSADO);
-		this.cbSituacao.setValue(SituacaoComentario.NAOANALISADO);
+		this.cbSituacao.addItem(ComentarioNaoAnalisado.getInstance());
+		this.cbSituacao.addItem(ComentarioAceito.getInstance());
+		this.cbSituacao.addItem(ComentarioRecusado.getInstance());
+		this.cbSituacao.setValue(ComentarioNaoAnalisado.getInstance());
 		this.cbSituacao.setNullSelectionAllowed(false);
 		
 		this.taComentarios = new TextArea("Comentários sobre a Pauta");
@@ -46,10 +49,10 @@ public class EditarComentarioWindow extends EditarWindow {
 		
 		this.cbSituacaoComentarios = new NativeSelect("Parecer sobre os Comentários");
 		this.cbSituacaoComentarios.setWidth("400px");
-		this.cbSituacaoComentarios.addItem(SituacaoComentario.NAOANALISADO);
-		this.cbSituacaoComentarios.addItem(SituacaoComentario.ACEITO);
-		this.cbSituacaoComentarios.addItem(SituacaoComentario.RECUSADO);
-		this.cbSituacaoComentarios.setValue(SituacaoComentario.NAOANALISADO);
+		this.cbSituacaoComentarios.addItem(ComentarioNaoAnalisado.getInstance());
+		this.cbSituacaoComentarios.addItem(ComentarioAceito.getInstance());
+		this.cbSituacaoComentarios.addItem(ComentarioRecusado.getInstance());
+		this.cbSituacaoComentarios.setValue(ComentarioNaoAnalisado.getInstance());
 		this.cbSituacaoComentarios.setNullSelectionAllowed(false);
 		
 		this.taMotivo = new TextArea("Motivo do Parecer");

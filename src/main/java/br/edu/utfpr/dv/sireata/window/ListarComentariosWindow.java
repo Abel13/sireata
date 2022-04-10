@@ -16,7 +16,8 @@ import com.vaadin.ui.themes.ValoTheme;
 
 import br.edu.utfpr.dv.sireata.bo.ComentarioBO;
 import br.edu.utfpr.dv.sireata.model.Comentario;
-import br.edu.utfpr.dv.sireata.model.Comentario.SituacaoComentario;
+import br.edu.utfpr.dv.sireata.model.ComentarioAceito;
+import br.edu.utfpr.dv.sireata.model.ComentarioRecusado;
 import br.edu.utfpr.dv.sireata.model.Pauta;
 
 public class ListarComentariosWindow extends Window {
@@ -68,7 +69,7 @@ public class ListarComentariosWindow extends Window {
 			this.comentarios = bo.listarPorPauta(this.pauta.getIdPauta());
 			
 			for(Comentario c : this.comentarios){
-				this.gridComentarios.addRow(c.getUsuario().getNome(), (c.getSituacao() == SituacaoComentario.ACEITO ? "Sim" : (c.getSituacao() == SituacaoComentario.RECUSADO ? "Não" : "-")));
+				this.gridComentarios.addRow(c.getUsuario().getNome(), (c.getSituacao() == ComentarioAceito.getInstance() ? "Sim" : (c.getSituacao() == ComentarioRecusado.getInstance() ? "Não" : "-")));
 			}
 		} catch (Exception e) {
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);

@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 
 import br.edu.utfpr.dv.sireata.dao.ComentarioDAO;
 import br.edu.utfpr.dv.sireata.model.Comentario;
-import br.edu.utfpr.dv.sireata.model.Comentario.SituacaoComentario;
+import br.edu.utfpr.dv.sireata.model.ComentarioRecusado;
 
 public class ComentarioBO {
 	
@@ -47,10 +47,10 @@ public class ComentarioBO {
 	}
 	
 	public void validarDados(Comentario comentario) throws Exception{
-		if((comentario.getSituacao() == SituacaoComentario.RECUSADO) && (comentario.getComentarios().trim().isEmpty())){
+		if((comentario.getSituacao() == ComentarioRecusado.getInstance()) && (comentario.getComentarios().trim().isEmpty())){
 			throw new Exception("Informe o seu comentário.");
 		}
-		if((comentario.getSituacaoComentarios() == SituacaoComentario.RECUSADO) && (comentario.getMotivo().trim().isEmpty())){
+		if((comentario.getSituacaoComentarios() == ComentarioRecusado.getInstance()) && (comentario.getMotivo().trim().isEmpty())){
 			throw new Exception("Informe o motivo da recusa.");
 		}
 	}
