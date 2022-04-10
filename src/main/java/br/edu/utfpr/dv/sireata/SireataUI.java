@@ -61,7 +61,6 @@ public class SireataUI extends UI {
                 // Check if a user has logged in
                 boolean isLoggedIn = Session.isAutenticado();
                 boolean isLoginView = event.getNewView() instanceof LoginView;
-                boolean isMainView = event.getNewView() instanceof MainView;
                 boolean isAtaPublicadaView = event.getNewView() instanceof AtaPublicadaView;
                 
                 if (!isLoggedIn && !isLoginView && !isAtaPublicadaView) {
@@ -69,12 +68,6 @@ public class SireataUI extends UI {
                     // logged in
                     getNavigator().navigateTo(LoginView.NAME);
                     return false;
-                } else if (isLoggedIn && isLoginView) {
-                    // If someone tries to access to login view while logged in,
-                    // then cancel
-                    return true;
-                } else if(!isMainView && !isLoginView) {
-                	return true;
                 }
 
                 return true;
