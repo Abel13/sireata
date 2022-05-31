@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import br.edu.utfpr.dv.sireata.factory.AnexoFactory;
 import br.edu.utfpr.dv.sireata.factory.DAO;
-import br.edu.utfpr.dv.sireata.factory.DaoFactory;
 import br.edu.utfpr.dv.sireata.model.Anexo;
 
 public class AnexoBO {
-	private DaoFactory dao;
+	private AnexoFactory dao;
 	
 	public AnexoBO() {
 		this.dao = DAO.Anexo.getAnexoInstance();

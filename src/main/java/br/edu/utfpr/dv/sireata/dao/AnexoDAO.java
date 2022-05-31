@@ -8,11 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.edu.utfpr.dv.sireata.factory.DaoFactory;
+import br.edu.utfpr.dv.sireata.factory.AnexoFactory;
 import br.edu.utfpr.dv.sireata.model.Anexo;
 
-public class AnexoDAO implements DaoFactory {
-	
+public class AnexoDAO implements AnexoFactory {
+	@Override
 	public Anexo buscarPorId(int id) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -37,6 +37,7 @@ public class AnexoDAO implements DaoFactory {
 		}
 	}
 	
+	@Override
 	public List<Anexo> listarPorAta(int idAta) throws SQLException{
 		Connection conn = null;
 		Statement stmt = null;

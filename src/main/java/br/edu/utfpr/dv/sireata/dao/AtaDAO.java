@@ -9,11 +9,12 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.utfpr.dv.sireata.factory.AtaFactory;
 import br.edu.utfpr.dv.sireata.model.Ata;
 import br.edu.utfpr.dv.sireata.model.Ata.TipoAta;
 import br.edu.utfpr.dv.sireata.util.DateUtils;
 
-public class AtaDAO {
+public class AtaDAO implements AtaFactory {
 	
 	public Ata buscarPorId(int id) throws SQLException{
 		Connection conn = null;
@@ -39,7 +40,7 @@ public class AtaDAO {
 	
 	
 
-
+	@Override
 	public Ata buscarPorNumero(int idOrgao, TipoAta tipo, int numero, int ano) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -347,36 +348,40 @@ public class AtaDAO {
 		}
 	}
 	
-	public List<Ata> listarPorCampus(int idCampus, int idUsuario) throws SQLException{
+	public List<Ata> listarPorCampus(int idCampus, int idUsuario) throws SQLException {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		
-		try{
+
+		try {
 			conn = ConnectionDAO.getInstance().getConnection();
 			stmt = conn.createStatement();
-		
-			rs = stmt.executeQuery("SELECT DISTINCT atas.*, orgaos.nome AS orgao, p.nome AS presidente, s.nome AS secretario " +
-				"FROM atas INNER JOIN orgaos ON orgaos.idOrgao=atas.idOrgao " +
-				"INNER JOIN departamentos ON departamentos.idDepartamento=orgaos.idDepartamento " +
-				"INNER JOIN usuarios p ON p.idUsuario=atas.idPresidente " +
-				"INNER JOIN usuarios s ON s.idUsuario=atas.idSecretario " +
-				"INNER JOIN ataparticipantes ON ataparticipantes.idAta=atas.idAta " +
-				"WHERE atas.publicada=0 AND ataparticipantes.idUsuario=" + String.valueOf(idUsuario) + " AND departamentos.idCampus=" + String.valueOf(idCampus) + " ORDER BY atas.data DESC");
-		
+
+			rs = stmt
+					.executeQuery("SELECT DISTINCT atas.*, orgaos.nome AS orgao, p.nome AS presidente, s.nome AS secretario " +
+							"FROM atas INNER JOIN orgaos ON orgaos.idOrgao=atas.idOrgao " +
+							"INNER JOIN departamentos ON departamentos.idDepartamento=orgaos.idDepartamento " +
+							"INNER JOIN usuarios p ON p.idUsuario=atas.idPresidente " +
+							"INNER JOIN usuarios s ON s.idUsuario=atas.idSecretario " +
+							"INNER JOIN ataparticipantes ON ataparticipantes.idAta=atas.idAta " +
+							"WHERE atas.publicada=0 AND ataparticipantes.idUsuario=" + String.valueOf(idUsuario)
+							+ " AND departamentos.idCampus=" + String.valueOf(idCampus) + " ORDER BY atas.data DESC");
+
 			List<Ata> list = new ArrayList<Ata>();
-			
-			while(rs.next()){
+
+			while (rs.next()) {
 				list.add(this.carregarObjeto(rs));
 			}
-			
+
 			return list;
-		}finally{
-			FinallyConnection(conn, stmt, rs); 
+		} finally {
+			FinallyConnection(conn, stmt, rs);
 		}
 	}
 	
-	public int salvar(Ata ata) throws SQLException{
+	@Override
+	public int salvar(Object obj) throws SQLException {
+		Ata ata = (Ata) obj;
 		boolean insert = (ata.getIdAta() == 0);
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -629,5 +634,4 @@ public class AtaDAO {
 			stmt = conn.prepareStatement(
 						sql); 
 	}
-
 }
