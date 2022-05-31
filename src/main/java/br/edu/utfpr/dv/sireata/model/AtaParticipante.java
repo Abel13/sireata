@@ -3,26 +3,23 @@ package br.edu.utfpr.dv.sireata.model;
 public class AtaParticipante {
 	
 	private int idAtaParticipante;
-	private Ata ata = new Ata();
+	private Ata ata;
 	private Usuario participante;
 	private boolean presente;
 	private String motivo;
 	private String designacao;
 	private boolean membro;
 	
-	public AtaParticipante() {
+	public AtaParticipante(){
 		this.setIdAtaParticipante(0);
+		this.setAta(new Ata());
 		this.setParticipante(new Usuario());
 		this.setPresente(true);
 		this.setMotivo("");
 		this.setDesignacao("");
 		this.setMembro(false);
 	}
-
-	public AtaParticipante(Ata ata) {
-		this();
-		this.ata = ata;
-	}	
+	
 	public int getIdAtaParticipante() {
 		return idAtaParticipante;
 	}
@@ -31,6 +28,9 @@ public class AtaParticipante {
 	}
 	public Ata getAta() {
 		return ata;
+	}
+	public void setAta(Ata ata) {
+		this.ata = ata;
 	}
 	public Usuario getParticipante() {
 		return participante;
