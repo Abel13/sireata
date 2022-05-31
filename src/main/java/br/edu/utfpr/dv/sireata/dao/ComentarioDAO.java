@@ -8,10 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.utfpr.dv.sireata.factory.ComentarioFactory;
 import br.edu.utfpr.dv.sireata.model.Comentario;
 import br.edu.utfpr.dv.sireata.model.Comentario.SituacaoComentario;
 
-public class ComentarioDAO {
+public class ComentarioDAO implements ComentarioFactory {
 	
 	public Comentario buscarPorId(int id) throws SQLException{
 		Connection conn = null;
@@ -84,7 +85,8 @@ public class ComentarioDAO {
 		}
 	}
 	
-	public int salvar(Comentario comentario) throws SQLException{
+	public int salvar(Object obj) throws SQLException {
+		Comentario comentario = (Comentario) obj;
 		boolean insert = (comentario.getIdComentario() == 0);
 		Connection conn = null;
 		PreparedStatement stmt = null;

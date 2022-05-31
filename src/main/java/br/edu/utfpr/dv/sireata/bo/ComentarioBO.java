@@ -4,53 +4,50 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import br.edu.utfpr.dv.sireata.dao.ComentarioDAO;
+import br.edu.utfpr.dv.sireata.factory.ComentarioFactory;
+import br.edu.utfpr.dv.sireata.factory.DAO;
 import br.edu.utfpr.dv.sireata.model.Comentario;
-import br.edu.utfpr.dv.sireata.model.ComentarioRecusado;
+import br.edu.utfpr.dv.sireata.model.Comentario.SituacaoComentario;
 
 public class ComentarioBO {
+	private ComentarioFactory dao;
 	
+	public ComentarioBO() {
+		this.dao = DAO.Comentario.getComentarioInstance();
+	}
+
 	public Comentario buscarPorId(int id) throws Exception{
 		try{
-			ComentarioDAO dao = new ComentarioDAO();
-			
-			return dao.buscarPorId(id);
+			return (Comentario)dao.buscarPorId(id);
 		}catch(Exception e){
-			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
-			
+			exception(e);
 			throw new Exception(e.getMessage());
 		}
 	}
 	
 	public Comentario buscarPorUsuario(int idUsuario, int idPauta) throws Exception{
 		try{
-			ComentarioDAO dao = new ComentarioDAO();
-			
 			return dao.buscarPorUsuario(idUsuario, idPauta);
 		}catch(Exception e){
-			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
-			
+			exception(e);
 			throw new Exception(e.getMessage());
 		}
 	}
 	
 	public List<Comentario> listarPorPauta(int idPauta) throws Exception{
 		try{
-			ComentarioDAO dao = new ComentarioDAO();
-			
 			return dao.listarPorPauta(idPauta);
 		}catch(Exception e){
-			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
-			
+			exception(e);
 			throw new Exception(e.getMessage());
 		}
 	}
 	
 	public void validarDados(Comentario comentario) throws Exception{
-		if((comentario.getSituacao() == ComentarioRecusado.getInstance()) && (comentario.getComentarios().trim().isEmpty())){
+		if((comentario.getSituacao() == SituacaoComentario.RECUSADO) && (comentario.getComentarios().trim().isEmpty())){
 			throw new Exception("Informe o seu comentário.");
 		}
-		if((comentario.getSituacaoComentarios() == ComentarioRecusado.getInstance()) && (comentario.getMotivo().trim().isEmpty())){
+		if((comentario.getSituacaoComentarios() == SituacaoComentario.RECUSADO) && (comentario.getMotivo().trim().isEmpty())){
 			throw new Exception("Informe o motivo da recusa.");
 		}
 	}
@@ -59,18 +56,16 @@ public class ComentarioBO {
 		try{
 			if((comentario.getPauta() == null) || (comentario.getPauta().getIdPauta() == 0)){
 				throw new Exception("Informe a pauta.");
-			}
-			
-			this.validarDados(comentario);
-			
-			ComentarioDAO dao = new ComentarioDAO();
-			
+			}		
+			this.validarDados(comentario);			
 			return dao.salvar(comentario);
 		}catch(Exception e){
-			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
-			
+			exception(e);
 			throw new Exception(e.getMessage());
 		}
+	}
+	private void exception(Exception e){
+		Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 	}
 
 }
