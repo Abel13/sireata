@@ -3,6 +3,7 @@ package br.edu.utfpr.dv.sireata.factory;
 import br.edu.utfpr.dv.sireata.dao.AnexoDAO;
 import br.edu.utfpr.dv.sireata.dao.AtaDAO;
 import br.edu.utfpr.dv.sireata.dao.AtaParticipanteDAO;
+import br.edu.utfpr.dv.sireata.dao.OrgaoDAO;
 
 public enum DAO {
   Anexo {
@@ -19,6 +20,11 @@ public enum DAO {
     public AtaParticipanteDAO getAtaParticipanteInstance() {
       return new AtaParticipanteDAO();
     }
+  },
+  Orgao {
+    public OrgaoDAO getOrgaoInstance() {
+      return new OrgaoDAO();
+    }
   };
 
   public AnexoDAO getAnexoInstance() {
@@ -31,5 +37,9 @@ public enum DAO {
 
   public AtaParticipanteDAO getAtaParticipanteInstance() {
     return AtaParticipante.getAtaParticipanteInstance();
+  }
+
+  public OrgaoDAO getOrgaoInstance() {
+    return Orgao.getOrgaoInstance();
   }
 }

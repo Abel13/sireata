@@ -28,7 +28,7 @@ public class AtaParticipanteBO {
 	
 	public List<AtaParticipante> listarPorAta(int idAta) throws Exception{
 		try{
-			return (List<AtaParticipante>)dao.listarPorAta(idAta);
+			return dao.listarPorAta(idAta);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			

@@ -634,13 +634,4 @@ public class AtaDAO implements AtaFactory {
 			stmt = conn.prepareStatement(
 						sql); 
 	}
-
-
-
-
-	@Override
-	public Object listarPorAta(int idAta) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

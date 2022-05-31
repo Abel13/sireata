@@ -8,13 +8,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.utfpr.dv.sireata.factory.OrgaoFactory;
 import br.edu.utfpr.dv.sireata.model.Orgao;
 import br.edu.utfpr.dv.sireata.model.OrgaoMembro;
 import br.edu.utfpr.dv.sireata.model.Usuario;
 
-public class OrgaoDAO {
+public class OrgaoDAO implements OrgaoFactory {
 	
-	public Orgao buscarPorId(int id) throws SQLException{
+	public Object buscarPorId(int id) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -260,7 +261,8 @@ public class OrgaoDAO {
 		}
 	}
 	
-	public int salvar(Orgao orgao) throws SQLException{
+	public int salvar(Object obj) throws SQLException {
+		Orgao orgao = (Orgao) obj;
 		boolean insert = (orgao.getIdOrgao() == 0);
 		Connection conn = null;
 		PreparedStatement stmt = null;

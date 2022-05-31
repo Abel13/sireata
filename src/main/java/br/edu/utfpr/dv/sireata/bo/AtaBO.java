@@ -14,8 +14,6 @@ import org.apache.pdfbox.multipdf.PDFMergerUtility;
 
 import br.edu.utfpr.dv.sireata.factory.AtaFactory;
 import br.edu.utfpr.dv.sireata.factory.DAO;
-import br.edu.utfpr.dv.sireata.dao.AtaParticipanteDAO;
-import br.edu.utfpr.dv.sireata.dao.OrgaoDAO;
 import br.edu.utfpr.dv.sireata.dao.PautaDAO;
 
 import br.edu.utfpr.dv.sireata.model.Anexo;
@@ -214,10 +212,8 @@ public class AtaBO {
 			
 			if(ata.getParticipantes() != null){
 				for(AtaParticipante p : ata.getParticipantes()){
-					AtaParticipanteDAO pdao = new AtaParticipanteDAO();
-					
 					p.getAta().setIdAta(id);
-					pdao.salvar(p);
+					DAO.AtaParticipante.getAtaParticipanteInstance().salvar(p);
 				}
 			}
 			
@@ -374,7 +370,6 @@ public class AtaBO {
 			ata.setParticipantes(apbo.listarPorAta(idAta));
 			
 			for(AtaParticipante participante : ata.getParticipantes()){
-				OrgaoDAO odao = new OrgaoDAO();
 				ParticipanteReport pr = new ParticipanteReport();
 				
 				pr.setNome(participante.getParticipante().getNome() + (participante.getDesignacao().isEmpty() ? "" : " (" + participante.getDesignacao() + ")"));
