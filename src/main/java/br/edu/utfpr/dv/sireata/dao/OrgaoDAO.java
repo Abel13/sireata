@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.utfpr.dv.sireata.factory.DAO;
 import br.edu.utfpr.dv.sireata.factory.OrgaoFactory;
 import br.edu.utfpr.dv.sireata.model.Orgao;
 import br.edu.utfpr.dv.sireata.model.OrgaoMembro;
@@ -203,9 +204,7 @@ public class OrgaoDAO implements OrgaoFactory {
 			rs = stmt.executeQuery();
 			
 			if(rs.next()){
-				UsuarioDAO dao = new UsuarioDAO();
-				
-				return dao.buscarPorId(rs.getInt("idPresidente"));
+				return DAO.Usuario.getUsuarioInstance().buscarPorId(rs.getInt("idPresidente"));
 			}else{
 				return null;
 			}
@@ -229,9 +228,7 @@ public class OrgaoDAO implements OrgaoFactory {
 			rs = stmt.executeQuery();
 			
 			if(rs.next()){
-				UsuarioDAO dao = new UsuarioDAO();
-				
-				return dao.buscarPorId(rs.getInt("idSecretario"));
+				return DAO.Usuario.getUsuarioInstance().buscarPorId(rs.getInt("idSecretario"));
 			}else{
 				return null;
 			}

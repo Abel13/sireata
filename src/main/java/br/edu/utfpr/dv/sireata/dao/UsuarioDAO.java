@@ -8,9 +8,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.utfpr.dv.sireata.factory.UsuarioFactory;
 import br.edu.utfpr.dv.sireata.model.Usuario;
 
-public class UsuarioDAO {
+public class UsuarioDAO implements UsuarioFactory {
 	
 	public Usuario buscarPorLogin(String login) throws SQLException{
 		Connection conn = null;
@@ -134,7 +135,8 @@ public class UsuarioDAO {
 		}
 	}
 	
-	public int salvar(Usuario usuario) throws SQLException{
+	public int salvar(Object obj) throws SQLException {
+		Usuario usuario = (Usuario) obj;
 		boolean insert = (usuario.getIdUsuario() == 0);
 		Connection conn = null;
 		PreparedStatement stmt = null;
