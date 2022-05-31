@@ -5,6 +5,7 @@ import br.edu.utfpr.dv.sireata.dao.AtaDAO;
 import br.edu.utfpr.dv.sireata.dao.AtaParticipanteDAO;
 import br.edu.utfpr.dv.sireata.dao.CampusDAO;
 import br.edu.utfpr.dv.sireata.dao.ComentarioDAO;
+import br.edu.utfpr.dv.sireata.dao.DepartamentoDAO;
 import br.edu.utfpr.dv.sireata.dao.OrgaoDAO;
 import br.edu.utfpr.dv.sireata.dao.PautaDAO;
 import br.edu.utfpr.dv.sireata.dao.UsuarioDAO;
@@ -49,6 +50,11 @@ public enum DAO {
     public CampusDAO getCampusInstance() {
       return new CampusDAO();
     }
+  },
+  Departamento {
+    public DepartamentoDAO getDepartamentoInstance() {
+      return new DepartamentoDAO();
+    }
   };
 
   public AnexoDAO getAnexoInstance() {
@@ -80,6 +86,10 @@ public enum DAO {
   }
 
   public CampusDAO getCampusInstance() {
-    return Usuario.getCampusInstance();
+    return Campus.getCampusInstance();
+  }
+
+  public DepartamentoDAO getDepartamentoInstance() {
+    return Departamento.getDepartamentoInstance();
   }
 }

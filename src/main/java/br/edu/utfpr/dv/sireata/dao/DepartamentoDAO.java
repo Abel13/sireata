@@ -9,9 +9,10 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.utfpr.dv.sireata.factory.DepartamentoFactory;
 import br.edu.utfpr.dv.sireata.model.Departamento;
 
-public class DepartamentoDAO {
+public class DepartamentoDAO implements DepartamentoFactory {
 
 	public Departamento buscarPorId(int id) throws SQLException{
 		Connection conn = null;
@@ -172,7 +173,8 @@ public class DepartamentoDAO {
 		}
 	}
 	
-	public int salvar(Departamento departamento) throws SQLException{
+	public int salvar(Object obj) throws SQLException {
+		Departamento departamento = (Departamento) obj;
 		boolean insert = (departamento.getIdDepartamento() == 0);
 		Connection conn = null;
 		PreparedStatement stmt = null;
