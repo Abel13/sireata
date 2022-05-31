@@ -3,6 +3,7 @@ package br.edu.utfpr.dv.sireata.factory;
 import br.edu.utfpr.dv.sireata.dao.AnexoDAO;
 import br.edu.utfpr.dv.sireata.dao.AtaDAO;
 import br.edu.utfpr.dv.sireata.dao.AtaParticipanteDAO;
+import br.edu.utfpr.dv.sireata.dao.CampusDAO;
 import br.edu.utfpr.dv.sireata.dao.ComentarioDAO;
 import br.edu.utfpr.dv.sireata.dao.OrgaoDAO;
 import br.edu.utfpr.dv.sireata.dao.PautaDAO;
@@ -43,6 +44,11 @@ public enum DAO {
     public UsuarioDAO getUsuarioInstance() {
       return new UsuarioDAO();
     }
+  },
+  Campus {
+    public CampusDAO getCampusInstance() {
+      return new CampusDAO();
+    }
   };
 
   public AnexoDAO getAnexoInstance() {
@@ -71,5 +77,9 @@ public enum DAO {
 
   public UsuarioDAO getUsuarioInstance() {
     return Usuario.getUsuarioInstance();
+  }
+
+  public CampusDAO getCampusInstance() {
+    return Usuario.getCampusInstance();
   }
 }

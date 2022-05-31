@@ -9,9 +9,10 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.utfpr.dv.sireata.factory.CampusFactory;
 import br.edu.utfpr.dv.sireata.model.Campus;
 
-public class CampusDAO {
+public class CampusDAO implements CampusFactory {
 	
 	public Campus buscarPorId(int id) throws SQLException{
 		Connection conn = null;
@@ -138,7 +139,8 @@ public class CampusDAO {
 		}
 	}
 	
-	public int salvar(Campus campus) throws SQLException{
+	public int salvar(Object obj) throws SQLException {
+		Campus campus = (Campus) obj;
 		boolean insert = (campus.getIdCampus() == 0);
 		Connection conn = null;
 		PreparedStatement stmt = null;
