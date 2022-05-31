@@ -14,7 +14,6 @@ import org.apache.pdfbox.multipdf.PDFMergerUtility;
 
 import br.edu.utfpr.dv.sireata.factory.AtaFactory;
 import br.edu.utfpr.dv.sireata.factory.DAO;
-import br.edu.utfpr.dv.sireata.dao.PautaDAO;
 
 import br.edu.utfpr.dv.sireata.model.Anexo;
 import br.edu.utfpr.dv.sireata.model.Ata;
@@ -201,11 +200,9 @@ public class AtaBO {
 				int i = 1;
 				
 				for(Pauta p : ata.getPauta()){
-					PautaDAO pdao = new PautaDAO();
-					
 					p.getAta().setIdAta(id);
 					p.setOrdem(i);
-					pdao.salvar(p);
+					DAO.Pauta.getPautaInstance().salvar(p);
 					i++;
 				}
 			}

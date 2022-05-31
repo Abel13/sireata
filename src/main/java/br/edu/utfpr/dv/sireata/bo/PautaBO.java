@@ -4,16 +4,22 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import br.edu.utfpr.dv.sireata.dao.PautaDAO;
+import br.edu.utfpr.dv.sireata.factory.DAO;
+import br.edu.utfpr.dv.sireata.factory.PautaFactory;
 import br.edu.utfpr.dv.sireata.model.Pauta;
 
 public class PautaBO {
+	private PautaFactory dao;
 	
+	public PautaBO() {
+		this.dao = DAO.Pauta.getPautaInstance();
+	}
+
 	public Pauta buscarPorId(int id) throws Exception{
 		try{
-			PautaDAO dao = new PautaDAO();
 			
-			return dao.buscarPorId(id);
+			
+			return (Pauta)dao.buscarPorId(id);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -23,7 +29,7 @@ public class PautaBO {
 	
 	public List<Pauta> listarPorAta(int idAta) throws Exception{
 		try{
-			PautaDAO dao = new PautaDAO();
+			
 			
 			return dao.listarPorAta(idAta);
 		}catch(Exception e){
@@ -47,7 +53,7 @@ public class PautaBO {
 			
 			this.validarDados(pauta);
 			
-			PautaDAO dao = new PautaDAO();
+			
 			
 			return dao.salvar(pauta);
 		}catch(Exception e){
@@ -63,7 +69,7 @@ public class PautaBO {
 	
 	public void excluir(int id) throws Exception{
 		try{
-			PautaDAO dao = new PautaDAO();
+			
 			
 			dao.excluir(id);
 		}catch(Exception e){

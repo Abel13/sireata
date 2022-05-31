@@ -9,8 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.utfpr.dv.sireata.model.Pauta;
+import br.edu.utfpr.dv.sireata.factory.PautaFactory;
 
-public class PautaDAO {
+public class PautaDAO implements PautaFactory {
 	
 	public Pauta buscarPorId(int id) throws SQLException{
 		Connection conn = null;
@@ -58,7 +59,8 @@ public class PautaDAO {
 		}
 	}
 	
-	public int salvar(Pauta pauta) throws SQLException{
+	public int salvar(Object obj) throws SQLException {
+		Pauta pauta = (Pauta) obj;
 		boolean insert = (pauta.getIdPauta() == 0);
 		Connection conn = null;
 		PreparedStatement stmt = null;

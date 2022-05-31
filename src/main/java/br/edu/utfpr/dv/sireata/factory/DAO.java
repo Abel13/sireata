@@ -5,6 +5,7 @@ import br.edu.utfpr.dv.sireata.dao.AtaDAO;
 import br.edu.utfpr.dv.sireata.dao.AtaParticipanteDAO;
 import br.edu.utfpr.dv.sireata.dao.ComentarioDAO;
 import br.edu.utfpr.dv.sireata.dao.OrgaoDAO;
+import br.edu.utfpr.dv.sireata.dao.PautaDAO;
 
 public enum DAO {
   Anexo {
@@ -31,6 +32,11 @@ public enum DAO {
     public ComentarioDAO getComentarioInstance() {
       return new ComentarioDAO();
     }
+  },
+  Pauta {
+    public PautaDAO getPautaInstance() {
+      return new PautaDAO();
+    }
   };
 
   public AnexoDAO getAnexoInstance() {
@@ -51,5 +57,9 @@ public enum DAO {
 
   public ComentarioDAO getComentarioInstance() {
     return Comentario.getComentarioInstance();
+  }
+
+  public PautaDAO getPautaInstance() {
+    return Comentario.getPautaInstance();
   }
 }
